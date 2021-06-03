@@ -10,9 +10,8 @@ import (
 // 比较连个链表，
 // 再次翻转后面的链表恢复成原来的链表
 
-
 func main() {
-	a := util.GetListNode([]int{1, 2, 3, 4, 3, 2, 1})
+	a := util.GetListNode([]int{1, 2, 3, 4, 4, 2, 1})
 	fmt.Println(isPalindrome(a))
 	util.ShowListNode(a)
 
@@ -30,6 +29,8 @@ func isPalindrome(head *util.ListNode) bool {
 	rec := head2
 	for head2 != nil {
 		if head2.Val != head.Val {
+			// 恢复链表
+			fz(rec)
 			return false
 		}
 		head = head.Next
