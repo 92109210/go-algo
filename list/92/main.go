@@ -1,46 +1,21 @@
 package main
 
-import "fmt"
+import (
+	"go-algo/list/util"
+)
 
 func main() {
-	list := []int{3, 5}
-	head := getListNode(list)
-	showListNode(head)
-	after := reverseBetween(head, 1, 2)
-	showListNode(after)
+	list := []int{1, 2, 3, 4, 5}
+	head := util.GetListNode(list)
+	util.ShowListNode(head)
+	after := reverseBetween1(head, 2, 4)
+	util.ShowListNode(after)
 }
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
-func getListNode(list []int) *ListNode {
-	head := &ListNode{}
-	pre := head
-	for _, val := range list {
-		temp := &ListNode{
-			Val:  val,
-			Next: nil,
-		}
-		pre.Next = temp
-		pre = temp
-	}
-	return head.Next
-}
-
-func showListNode(head *ListNode) {
-	for head != nil {
-		fmt.Printf("%d, ", head.Val)
-		head = head.Next
-	}
-	fmt.Printf("\n")
-}
-
-func reverseBetween(head *ListNode, left int, right int) *ListNode {
+func reverseBetween(head *util.ListNode, left int, right int) *util.ListNode {
 	node := head
-	stack := make([]*ListNode, 0)
-	pre := &ListNode{Next: head}
+	stack := make([]*util.ListNode, 0)
+	pre := &util.ListNode{Next: head}
 	prehead := pre
 	index := 0
 	listIndex := 1
@@ -66,4 +41,22 @@ func reverseBetween(head *ListNode, left int, right int) *ListNode {
 	}
 	pre.Next = node
 	return prehead.Next
+}
+
+// 优化
+// 头插法
+func reverseBetween1(head *util.ListNode, left int, right int) *util.ListNode {
+	pre := &util.ListNode{Next: head}
+	head = pre
+	for i := 0; i < left-1; i++ {
+		pre = pre.Next
+	}
+	curr := pre.Next
+	for i := 0; i < right-left; i++ {
+		next := curr.Next
+		curr.Next = next.Next
+		next.Next = pre.Next
+		pre.Next = next
+	}
+	return head.Next
 }
