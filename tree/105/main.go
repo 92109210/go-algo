@@ -15,14 +15,14 @@ func buildTree(preorder []int, inorder []int) *tree.TreeNode {
 		return nil
 	}
 	inorderIndex := getIndexByValue(inorder, preorder[0])
-	leftPerprder := preorder[1 : inorderIndex+1]
-	rightPerprder := preorder[inorderIndex+1:]
+	leftPreorder := preorder[1 : inorderIndex+1]
+	rightPreorder := preorder[inorderIndex+1:]
 	leftInorder := inorder[:inorderIndex]
 	rightInorder := inorder[inorderIndex+1:]
 	node := tree.TreeNode{
 		Val:   preorder[0],
-		Left:  buildTree(leftPerprder, leftInorder),
-		Right: buildTree(rightPerprder, rightInorder),
+		Left:  buildTree(leftPreorder, leftInorder),
+		Right: buildTree(rightPreorder, rightInorder),
 	}
 	return &node
 }
