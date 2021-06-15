@@ -1,9 +1,10 @@
 package main
 
-import "go-algo/tree"
+import (
+	"go-algo/tree"
+)
 
 func main() {
-
 }
 
 func insertIntoBST(root *tree.TreeNode, val int) *tree.TreeNode {
