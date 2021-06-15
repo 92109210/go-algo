@@ -21,8 +21,5 @@ func searchBST(root *tree.TreeNode, val int) *tree.TreeNode {
 	if left != nil {
 		return left
 	}
-	if right != nil {
-		return right
-	}
-	return nil
+	return right
 }
